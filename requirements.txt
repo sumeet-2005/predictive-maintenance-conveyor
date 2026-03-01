@@ -1,12 +1,4 @@
-# Core ML and data processing packages (install everywhere)
-numpy
-pandas
-scikit-learn
-opencv-python
-matplotlib
-joblib
-
-# Raspberry Pi specific packages (install only on Pi)
-# RPi.GPIO
-# picamera
-# Adafruit_DHT
+setuptools==69.5.1
+wheel==0.43.0
+flask==3.0.0
+gunicorn==21.2.0

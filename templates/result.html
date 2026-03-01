@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .result-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .condition {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .confidence {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .sensor-data {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .sensor-item {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .sensor-label {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .sensor-value {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #856404;
+        }
+        
+        .github-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .github-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Analysis Result</h1>
+        
+        <div class="result-card" style="border-left: 8px solid {% if color == 'green' %}#28a745{% elif color == 'yellow' %}#ffc107{% else %}#dc3545{% endif %};">
+            <div class="condition" style="color: {% if color == 'green' %}#28a745{% elif color == 'yellow' %}#ffc107{% else %}#dc3545{% endif %};">
+                {{ condition }}
+            </div>
+            <div class="confidence">
+                Confidence: {{ confidence }}
+            </div>
+            
+            <div class="sensor-data">
+                <div class="sensor-item">
+                    <div class="sensor-label">Temperature</div>
+                    <div class="sensor-value">{{ temperature }}°C</div>
+                </div>
+                <div class="sensor-item">
+                    <div class="sensor-label">Humidity</div>
+                    <div class="sensor-value">{{ humidity }}%</div>
+                </div>
+                <div class="sensor-item">
+                    <div class="sensor-label">Vibration</div>
+                    <div class="sensor-value">{{ vibration }}</div>
+                </div>
+                <div class="sensor-item">
+                    <div class="sensor-label">Motor Current</div>
+                    <div class="sensor-value">{{ motor_current }}A</div>
+                </div>
+            </div>
+        </div>
+        
+        {% if prediction >= 2 %}
+        <div class="warning-box">
+            ⚠️ <strong>Action Required:</strong> Immediate inspection recommended. Potential belt damage detected.
+        </div>
+        {% endif %}
+        
+        <div class="action-buttons">
+            <a href="/" class="btn btn-primary">↻ Test Again</a>
+            <a href="https://github.com/sumeet-2005/predictive-maintenance-conveyor" target="_blank" class="btn btn-secondary">
+                View Code
+            </a>
+        </div>
+        
+        <div class="github-link">
+            <p style="color: #999; margin-top: 20px;">Project by Sumeet D Biradar • DevOps Portfolio</p>
+        </div>
+    </div>
+</body>
+</html>
